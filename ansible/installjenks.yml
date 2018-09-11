@@ -1,0 +1,22 @@
+---
+ - hosts: '{{ machine }}'
+   remote_user: auser
+   gather_facts: '{{ gather }}'
+   become: '{{ gather }}'
+   vars:
+      gather: yes
+      pkg: jenkins-2.121.1
+      machine: myservers
+   tasks:
+    - name: Uninstall Jenkins on server
+      yum: 
+        name: '{{ pkg }}'
+        state: absent
+    - name: Install Jenkins on Server
+      yum:
+        name: '{{ pkg }}'
+        state: latest
+      register: result
+    - debug: var=result
+      
+ 

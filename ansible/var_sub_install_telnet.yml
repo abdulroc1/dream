@@ -1,0 +1,14 @@
+--- #Install Telnet
+- hosts: "{{ machine }}"
+  become: yes
+  become_method: sudo
+  gather_facts: "{{ gather }}"
+  tasks:
+   - name: Uninstall telnet.x86_64
+     yum: 
+      name: "{{ pkg }}"
+      state: "{{ vanish }}"
+   - name: Install telnet.x86_64
+     yum:
+      name: "{{ pkg }}"
+      state: "{{ penya }}"

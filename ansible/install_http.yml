@@ -1,0 +1,31 @@
+--- # Install HTTPD
+- hosts: '{{ machine }}'
+  gather_facts: '{{ gather }}'
+  become: yes
+  vars:
+     machine: xcapital
+     gather: yes
+     ohyes: present
+     ohno: absent
+     pkg: httpd
+     run: started
+     stop: stopped
+  tasks:  
+     - name: Install httpd on three servers
+       yum:
+         name: '{{ pkg }}'  
+         state: '{{ ohyes }}'
+     - name: Start and enable service
+       service: 
+         name: '{{ pkg }}' 
+         state: '{{ run }}'
+     - name: Stop and disable service
+       service:
+         name: '{{ pkg }}'
+         state: '{{ stop }}'  
+     - name: Uninstall httpd on all three servers
+       yum:
+         name: '{{ pkg }}'
+         state: '{{ ohno }}'
+       register: result
+     - debug: var=result
