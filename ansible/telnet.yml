@@ -1,0 +1,6 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install telnet on all host servers
+      yum: name=telnet.x86_64 state=latest 
